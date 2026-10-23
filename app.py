@@ -28,11 +28,13 @@ DATA_PATH = "starbucks.csv"
 
 @st.cache_resource
 def load_model():
-    with open(MODEL_PATH, "rb") as file:
-        return pickle.load(file)
-
-model = load_model()
-df = pd.read_csv(DATA_PATH)
+    try:
+        with open(MODEL_PATH, "rb") as file:
+            return pickle.load(file)
+    except Exception as e:
+        st.error(f"Error type: {type(e).__name__}")
+        st.code(str(e))
+        raise
 
 # The saved pipeline should retain the feature columns
 if not hasattr(model, "feature_names_in_"):
