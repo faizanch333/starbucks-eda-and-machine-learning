@@ -23,6 +23,9 @@ if not os.path.exists(DATA_PATH):
     st.error("Upload your Starbucks dataset as starbucks.csv.")
     st.stop()
 
+MODEL_PATH = "starbucks_decision_tree.pkl"
+DATA_PATH = "starbucks.csv"
+
 @st.cache_resource
 def load_model():
     with open(MODEL_PATH, "rb") as file:
